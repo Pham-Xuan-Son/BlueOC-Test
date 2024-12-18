@@ -9,7 +9,7 @@ export const serverApi = createApi({
   endpoints: (builder) => ({
     getData: builder.query({
       query: () => "/posts",
-      providesTags: ["Post"],
+      // providesTags: ["Post"],
     }),
     addData: builder.mutation({
       query: (newData) => ({
@@ -17,7 +17,7 @@ export const serverApi = createApi({
         method: "POST",
         body: newData,
       }),
-      invalidatesTags: ["Post"],
+      // invalidatesTags: ["Post"],
     }),
   }),
 });

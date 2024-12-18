@@ -1,17 +1,12 @@
-First, create a new React app using Yarn.
+1. Using Redux and RTK Query for State and API Calls.
+- RTK Query makes it easy to communicate with server. It helps request data and store it.
+- The "serverApi" get posts from the server (using getData) and add new posts (using addData).
 
-Next, install the necessary libraries for your project, including Redux.
+2. Fetching and Displaying Posts.
+- The PostView is a list that shows all the posts. The useGetDataQuery help get the posts from the server.
+- RTK Query takes care of showing "loading…" while it waits for the server and saving the posts.
 
-Create a folder named 'services', then create file name 'serverApi' to defines an RTK Query API and do CRUD action.
-
-Create a file name 'store' at root to configures the Redux store with the serverApi reducer and middleware.
-
-In App.js file, wrap the app inside the Provider and connect it to the Redux store.
-
-Create a file named PlaceholderListView to display the list and fetch data from the Redux store.
-
-Create a file named PostForm.js to add a form where users can enter new data and submit it.
-
-
-
-Use 'yarn start' to run app.
+3. Adding New Posts with PostForm.
+- The PostForm is a form where can write and add a new post. useAddDataMutation help send the new post to the server.
+- When submit the form, the app sends the post to the server and waits for success message.
+- On success the app adds the new post to the list.

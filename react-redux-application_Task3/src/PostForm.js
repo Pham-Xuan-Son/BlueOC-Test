@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { useGetDataQuery, useAddDataMutation } from "./services/serverApi";
+import {
+  useGetDataQuery,
+  useAddDataMutation,
+  serverApi,
+} from "./services/serverApi";
+import { useDispatch } from "react-redux";
 
 const PostForm = () => {
   const [value, setValue] = useState({
@@ -9,11 +14,17 @@ const PostForm = () => {
   });
   const [addData, { isLoading }] = useAddDataMutation();
   const { data } = useGetDataQuery();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addData({ id: data.length + 1, ...value });
+      const newData = await addData({ id: data.length + 1, ...value }).unwrap();
+      dispatch(
+        serverApi.util.updateQueryData("getData", undefined, (draft) => {
+          draft.push(newData);
+        })
+      );
       setValue({ userId: 1, title: "", body: "" });
     } catch (err) {
       console.error("Failed to add post:", err);
@@ -23,11 +34,11 @@ const PostForm = () => {
   return (
     <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
       <h2>Add New</h2>
-      <table>
+      <table style={{ tableLayout: "fixed", width: "250px" }}>
         <tbody>
           <tr>
-            <td>
-              <label htmlFor="title">userId</label>
+            <td style={{ width: "60px" }}>
+              <label htmlFor="title">User ID</label>
             </td>
             <td>
               <input
@@ -75,7 +86,7 @@ const PostForm = () => {
           </tr>
         </tbody>
       </table>
-      <button type="submit" disabled={isLoading}>
+      <button style={{ marginTop: "10px" }} type="submit" disabled={isLoading}>
         {isLoading ? "Adding..." : "Add New"}
       </button>
     </form>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetDataQuery } from "./services/serverApi";
 
-export default function PlaceholderListView() {
+export default function PostView() {
   const { data, isLoading, isFetching, isError, error } = useGetDataQuery();
 
   if (isLoading || isFetching) {
@@ -14,8 +14,8 @@ export default function PlaceholderListView() {
   }
 
   return (
-    <>
-      <h3>List</h3>
+    <div style={{display: "flex", flexDirection: "column", gap: "5px"}}>
+      <h2>List</h2>
       <table
         style={{
           border: "1px solid black",
@@ -70,6 +70,6 @@ export default function PlaceholderListView() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
