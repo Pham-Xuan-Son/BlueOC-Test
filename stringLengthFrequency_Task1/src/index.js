@@ -1,10 +1,9 @@
 const listString = ["a", "ab", "abc", "cd", "def", "gh"];
 
 function stringLengthFrequency(list) {
-  if (list.length === 0) return "Empty string";
-  const listStringArray = list.filter((string) => typeof string === "string");
+  if (list.length === 0) return [];
   const lengthFrequency = {};
-  for (const string of listStringArray) {
+  for (const string of list) {
     const length = string.length;
     if (length in lengthFrequency) {
       lengthFrequency[length] += 1;
@@ -16,9 +15,7 @@ function stringLengthFrequency(list) {
   const mostFrequentLength = Object.keys(lengthFrequency).find(
     (length) => lengthFrequency[length] === maxFrequency
   );
-  return listStringArray.filter(
-    (string) => string.length === Number(mostFrequentLength)
-  );
+  return list.filter((string) => string.length === Number(mostFrequentLength));
 }
 
 let a = stringLengthFrequency(listString);
