@@ -17,8 +17,8 @@ describe("sumofTopTwoIntegers", () => {
     const list = [1, 4, 2, 3, 5];
     expect(sumofTopTwoIntegers(list)).toBe(9);
   });
-  it("should return the sum of the top two biggest same numbers from an array", () => {
-    const list = [1, 4, 5, 2, 3, 5];
+  it("should return the sum of the top two biggest numbers from an array", () => {
+    const list = [1, 4, , 5, 2, 3, 5];
     expect(sumofTopTwoIntegers(list)).toBe(10);
   });
 });
